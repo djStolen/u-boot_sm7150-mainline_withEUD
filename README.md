@@ -1,4 +1,4 @@
-# SM7150 Fastboot-Only U-Boot (EUD Lifeline)
+# SM7150 Fastboot-Only U-Boot (EUD Lifeline) 🚀
 
 This repository contains build scripts, configs, and patches for producing a
 **fastboot-only U-Boot** image for Qualcomm SM7150 devices (e.g. Xiaomi Surya),
@@ -12,7 +12,7 @@ It is a **lifeline bootloader** designed to be hard to brick.
 
 ---
 
-## Design Goals
+## Design Goals 🎯
 
 - Boot directly into fastboot
 - Never fall through to a shell or boot command
@@ -31,26 +31,42 @@ If something looks “leaky” or “wrong” by normal U-Boot standards, it is 
 
 ---
 
-## Repository Contents
+## Main Inspiration 💡
 
-- **Build scripts**
+The core idea behind this repository is heavily inspired by Linaro’s work on
+**Qualcomm EUD (Emergency USB Download)** as a hidden-but-powerful hardware
+debug and recovery mechanism.
+
+In particular, this article was foundational:
+
+https://www.linaro.org/blog/hidden-jtag-qualcomm-snapdragon-usb/
+
+That write-up demonstrates how Qualcomm Snapdragon platforms can expose deep
+debug and recovery functionality purely over USB, without physical JTAG access.
+This project applies the same philosophy to U-Boot:
+
+> Keep USB alive at all costs, and the device stays recoverable.
+
+---
+
+## Repository Contents 📂
+
+- **Build scripts** 🛠️
   - Fetch and build `mkbootimg`
   - Fetch and build Qualcomm SM7150 U-Boot
   - Assemble an Android-compatible `boot.img`
 
-- **Config overlays**
-  - `tauchgang-eud-only.config`  
-    Minimal, fastboot-only, USB-never-dies configuration
-  - `tauchgang-efi.config` (optional / future)  
-    Full-featured EFI-capable configuration
+- **Config overlays** ⚙️
+  - `tauchgang-eud-only.config` — Minimal, fastboot-only, USB-never-dies
+  - `tauchgang-efi.config` — Full-featured EFI-capable (optional/future)
 
-- **Patches**
+- **Patches** 📝
   - Fastboot behavior changes to prevent USB gadget teardown
   - Qualcomm EUD enablement fixes
 
 ---
 
-## Fastboot Exit Patch (Why It Exists)
+## Fastboot Exit Patch (Why It Exists) ⚡
 
 One critical patch modifies `cmd/fastboot.c` so that fastboot **never runs its
 cleanup path**:
