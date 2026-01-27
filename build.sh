@@ -16,7 +16,9 @@ cd u-boot
 git apply ../uboot-patch-enable-eud-fastboot.patch
 
 # Configure U-Boot
-make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config tauchgang.config
+#make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config tauchgang.config
+cp ../tauchgang-eud-only.config configs/
+make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config tauchgang-eud-only.config
 
 # Build U-Boot qcom/sm7150-xiaomi-surya-tianma
 make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc) CONFIG_DEFAULT_DEVICE_TREE=qcom/sm7150-xiaomi-surya-tianma
@@ -24,4 +26,4 @@ make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc) CONFIG_DEFAULT_DEVICE
 # Assemble Android boot.img
 gzip .output/u-boot-nodtb.bin -c > .output/u-boot-nodtb.bin.gz
 cat .output/u-boot-nodtb.bin.gz .output/dts/upstream/src/arm64/qcom/sm7150-xiaomi-surya-tianma.dtb > .output/uboot-dtb
-          ../mkbootimg/mkbootimg --base '0x0' --kernel_offset '0x00008000' --pagesize '4096' --kernel .output/uboot-dtb -o .output/u-boot-sm7150-xiaomi-surya-tianma.img
+          ../mkbootimg/mkbootimg --base '0x0' --kernel_offset '0x00008000' --pagesize '4096' --kernel .output/uboot-dtb -o .output/u-boot-sm7150-xiaomi-surya-tianma-eud-enabler.img

@@ -7,7 +7,7 @@ index d4cfc0c7a282..9b397490d594 100644
  
  	ret = CMD_RET_SUCCESS;
  
-+	return 0;
++	return ret;
 +
  exit:
  	udc_device_put(udc);
