@@ -15,7 +15,7 @@ cd u-boot
 # Patch U-Boot. EUD enablment. Leave USB PHY active after leaving Fastboot
 git apply ../uboot-patch-enable-eud-fastboot.patch
 
-# Configure U-Boot
+# Configure U-Boot (commands from: https://github.com/sm7150-mainline/u-boot/blob/f8c04469e8284aa2f1691a30aa3b7dc59fa0b8cd/.github/workflows/build-images.yml)
 #make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config tauchgang.config
 cp ../tauchgang-eud-only.config configs/
 make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config tauchgang-eud-only.config
