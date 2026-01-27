@@ -1,0 +1,46 @@
+{
+  "name": "U-Boot with EUD for Qualcomm SM7150 Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--rm",
+    "--privileged",
+    "--net=host",
+    "-v", "/dev/bus/usb:/dev/bus/usb",
+    "--env", "DISPLAY=${localEnv:DISPLAY}",
+    "--device", "/dev/dri:/dev/dri"
+  ],
+  "remoteUser": "ubuntu",
+  "updateRemoteUserUID": true,
+  "mounts": [
+    {
+      "source": "${localEnv:HOME}/.ssh",
+      "target": "/home/ubuntu/.ssh",
+      "type": "bind"
+    },
+    {
+      "source": "/tmp/.X11-unix",
+      "target": "/tmp/.X11-unix",
+      "type": "bind"
+    }
+  ],
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:1": {
+      "configureZsh": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-vscode.cpptools",
+        "mathiasfrohlich.Kotlin",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "postCreateCommand": ""
+}

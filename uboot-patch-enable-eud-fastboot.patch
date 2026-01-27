@@ -1,0 +1,15 @@
+diff --git a/cmd/fastboot.c b/cmd/fastboot.c
+index d4cfc0c7a282..9b397490d594 100644
+--- a/cmd/fastboot.c
++++ b/cmd/fastboot.c
+@@ -108,8 +108,10 @@ static int do_fastboot_usb(int argc, char *const argv[],
+ 	}
+ 
+ 	ret = CMD_RET_SUCCESS;
+ 
++	return 0;
++
+ exit:
+ 	udc_device_put(udc);
+ 	g_dnl_unregister();
+ 	g_dnl_clear_detach();
