@@ -23,7 +23,26 @@ make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config
 # Build U-Boot qcom/sm7150-xiaomi-surya-tianma
 make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc) CONFIG_DEFAULT_DEVICE_TREE=qcom/sm7150-xiaomi-surya-tianma
 
-# Assemble Android boot.img
+# Assemble Android u-boot-sm7150-xiaomi-surya-tianma-eud-enabler.img
 gzip .output/u-boot-nodtb.bin -c > .output/u-boot-nodtb.bin.gz
 cat .output/u-boot-nodtb.bin.gz .output/dts/upstream/src/arm64/qcom/sm7150-xiaomi-surya-tianma.dtb > .output/uboot-dtb
           ../mkbootimg/mkbootimg --base '0x0' --kernel_offset '0x00008000' --pagesize '4096' --kernel .output/uboot-dtb -o .output/u-boot-sm7150-xiaomi-surya-tianma-eud-enabler.img
+
+cp .output/u-boot-sm7150-xiaomi-surya-tianma-eud-enabler.img ../u-boot-sm7150-xiaomi-surya-tianma-eud-enabler.img
+
+rm -rf .output
+
+# Configure U-Boot (commands from: https://github.com/sm7150-mainline/u-boot/blob/f8c04469e8284aa2f1691a30aa3b7dc59fa0b8cd/.github/workflows/build-images.yml)
+#make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config tauchgang.config
+cp ../tauchgang-eud-only.config configs/
+make CROSS_COMPILE=aarch64-linux-gnu- O=.output qcom_defconfig qcom-phone.config tauchgang-eud-only.config
+
+# Build U-Boot qcom/sm7150-xiaomi-surya-huaxing
+make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc) CONFIG_DEFAULT_DEVICE_TREE=qcom/sm7150-xiaomi-surya-huaxing
+
+# Assemble Android u-boot-sm7150-xiaomi-surya-huaxing-eud-enabler.img
+gzip .output/u-boot-nodtb.bin -c > .output/u-boot-nodtb.bin.gz
+cat .output/u-boot-nodtb.bin.gz .output/dts/upstream/src/arm64/qcom/sm7150-xiaomi-surya-huaxing.dtb > .output/uboot-dtb
+          ../mkbootimg/mkbootimg --base '0x0' --kernel_offset '0x00008000' --pagesize '4096' --kernel .output/uboot-dtb -o .output/u-boot-sm7150-xiaomi-surya-huaxing-eud-enabler.img
+
+cp .output/u-boot-sm7150-xiaomi-surya-huaxing-eud-enabler.img ../u-boot-sm7150-xiaomi-surya-huaxing-eud-enabler.img
