@@ -48,8 +48,6 @@ This project is built upon the following source code:
 * **EUD Logic:** https://github.com/quic/eud
 * **Debug Tooling:** This image is intended to be used alongside https://github.com/linux-msm/openocd for low-level debugging via the EUD interface.
 
-For further reading on recovery, proprietary lockouts, and institutional transparency, see **[xenu.net](https://www.xenu.net)**.
-
 ---
 
 ## Repository Contents 📂
